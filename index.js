@@ -1,6 +1,6 @@
 import express from "express";
 import {router} from "./routes/routes.js";
-import con from './config/db.js';
+// import con from './config/db.js';
 import * as dotenv from 'dotenv';
 import {ethers, formatUnits, JsonRpcProvider} from "ethers";
 import usdtAbi from "./config/usdtAbi.js";
@@ -14,7 +14,7 @@ dotenv.config();
 const app = express();
 const port = 3000;
 
-global.db = con;
+// global.db = con;
 
 console.log(process.env.USDT_CONTRACT_ADDRESS);
 app.use('/', router);
