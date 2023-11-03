@@ -5,7 +5,7 @@ const con = mysql.createConnection({
     port:'3306',
     user:'root',
     password:'12345678',
-    database:'formula'
+    database:'rasper'
 })
 con.connect(function(error){
     if(error) throw error;
