@@ -64,7 +64,9 @@ if (process.env.NODE_ENV == 'production') {
     //     response.writeHead(200, {"Content-Type": "text/plain"});
     //     response.end("Hello World\n");
     // }).listen(process.env.PORT);
-    http.createServer(app).listen(process.env.PORT);
+    const httpServer = http.createServer();
+    httpServer.on("request",app);
+    httpServer.listen(process.env.PORT);
 
 } else {
     app.use('/', router);
