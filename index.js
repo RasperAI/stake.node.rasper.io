@@ -13,7 +13,7 @@ const app = express();
 const port = 3000;
 
 mongoose.connect(process.env.MONGO_URL, {
-    useNewUrlParser: true,
+    // useNewUrlParser: true,
 });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -59,18 +59,5 @@ const main = async () => {
 
 }
 main();
-if (process.env.NODE_ENV == 'production') {
-    // http.createServer(function (request, response) {
-    //     response.writeHead(200, {"Content-Type": "text/plain"});
-    //     response.end("Hello World\n");
-    // }).listen(process.env.PORT);
-    const httpServer = http.createServer(app);
-    httpServer.listen(process.env.PORT);
-    // httpServer.on("request",app);
-
-} else {
-
-    app.listen(port, () => {
-        console.log(`App listening on port ${port}`);
-    })
-}
+const httpServer = http.createServer(app);
+httpServer.listen(process.env.PORT);
