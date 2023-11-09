@@ -1,7 +1,7 @@
 import mysql from "mysql2";
 
 const con = mysql.createConnection({
-    host:'host.docker.internal',
+    host:'0.0.0.0',
     port:'3307',
     user:'sail',
     password:'password',

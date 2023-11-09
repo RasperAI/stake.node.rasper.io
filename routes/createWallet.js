@@ -1,4 +1,5 @@
 import {ethers, JsonRpcProvider} from "ethers";
+import walletModel from "../models/walletModel.js";
 
 
 
@@ -27,12 +28,8 @@ export const createWallet = async (req, res) => {
     const rootKey = ethers.HDNodeWallet.fromExtendedKey(process.env.XPUB_ADDRESS);
     const childNode = rootKey.deriveChild(id);
     console.log("addressNode 1 -> ",childNode);
-
-    db.query(`update users set deposit_address='${childNode.address}' where id=${id}`,(err,result,fields)=>{
-        if (err) throw err;
-        console.log(result);
-    })
+    walletModel.create({user_id:id,wallet_address:childNode.address})
 
 
-    res.status(200).json({name: 'hello'});
+    res.status(200).json({address: childNode.address});
 }
