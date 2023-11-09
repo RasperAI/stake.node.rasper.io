@@ -22,7 +22,7 @@ db.once('open', () => {
 });
 
 app.use(express.json());
-
+app.use('/', router);
 
 const main = async () => {
 
@@ -69,7 +69,7 @@ if (process.env.NODE_ENV == 'production') {
     // httpServer.on("request",app);
 
 } else {
-    app.use('/', router);
+
     app.listen(port, () => {
         console.log(`App listening on port ${port}`);
     })
