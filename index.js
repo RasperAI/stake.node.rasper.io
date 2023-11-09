@@ -5,7 +5,7 @@ import {ethers, formatUnits, JsonRpcProvider} from "ethers";
 import abi from "./config/abi.js";
 import mongoose from "mongoose";
 import walletModel from "./models/walletModel.js";
-import * as http from "http";
+import http from "http";
 
 dotenv.config();
 
@@ -33,8 +33,8 @@ const main = async () => {
         console.log(from, to, value, event.log.transactionHash);
 
         const wallet = await walletModel.findOne({wallet_address: to});
-        if(wallet){
-            console.log("db wallet ",wallet);
+        if (wallet) {
+            console.log("db wallet ", wallet);
             provider.waitForTransaction(event.log.transactionHash).then(async (receipt) => {
                 console.log('Transaction Mined: ' + receipt.hash);
                 console.log(receipt);
@@ -48,8 +48,8 @@ const main = async () => {
                     })
                 })
                 const data = await response.json();
-                if (data){
-                    console.log("mlm response ->",data.message);
+                if (data) {
+                    console.log("mlm response ->", data.message);
                 }
 
             });
@@ -59,7 +59,13 @@ const main = async () => {
 
 }
 main();
-
-app.listen(port, () => {
-    console.log(`App listening on port ${port}`);
-})
+if (process.env.NODE_ENV == 'production') {
+    http.createServer(function (request, response) {
+        response.writeHead(200, {"Content-Type": "text/plain"});
+        response.end("Hello World\n");
+    }).listen(process.env.PORT)
+} else {
+    app.listen(port, () => {
+        console.log(`App listening on port ${port}`);
+    })
+}
