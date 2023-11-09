@@ -5,6 +5,7 @@ import {ethers, formatUnits, JsonRpcProvider} from "ethers";
 import abi from "./config/abi.js";
 import mongoose from "mongoose";
 import walletModel from "./models/walletModel.js";
+import * as http from "http";
 
 dotenv.config();
 
@@ -62,4 +63,3 @@ main();
 app.listen(port, () => {
     console.log(`App listening on port ${port}`);
 })
-
