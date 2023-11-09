@@ -22,7 +22,7 @@ db.once('open', () => {
 });
 
 app.use(express.json());
-app.use('/', router);
+
 
 const main = async () => {
 
@@ -60,11 +60,14 @@ const main = async () => {
 }
 main();
 if (process.env.NODE_ENV == 'production') {
-    http.createServer(function (request, response) {
-        response.writeHead(200, {"Content-Type": "text/plain"});
-        response.end("Hello World\n");
-    }).listen(process.env.PORT)
+    // http.createServer(function (request, response) {
+    //     response.writeHead(200, {"Content-Type": "text/plain"});
+    //     response.end("Hello World\n");
+    // }).listen(process.env.PORT);
+    http.createServer(app).listen(process.env.PORT);
+
 } else {
+    app.use('/', router);
     app.listen(port, () => {
         console.log(`App listening on port ${port}`);
     })
