@@ -29,8 +29,9 @@ const main = async () => {
     const provider = new JsonRpcProvider(process.env.RPC_PROVIDER);
     const contract = new ethers.Contract(process.env.USDT_MAINNET_CONTRACT_ADDRESS, abi, provider);
 
+    console.log("Transfer event watching");
     await contract.on('Transfer', async function (from, to, value, event) {
-        console.log(from, to, value, event.log.transactionHash);
+        // console.log(from, to, value, event.log.transactionHash);
 
         try {
             const wallet = await walletModel.findOne({wallet_address: to});

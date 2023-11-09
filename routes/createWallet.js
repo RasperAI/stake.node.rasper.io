@@ -28,8 +28,16 @@ export const createWallet = async (req, res) => {
     const rootKey = ethers.HDNodeWallet.fromExtendedKey(process.env.XPUB_ADDRESS);
     const childNode = rootKey.deriveChild(id);
     console.log("addressNode 1 -> ",childNode);
-    walletModel.create({user_id:id,wallet_address:childNode.address})
+    try{
+        const response = await walletModel.create({user_id:id,wallet_address:childNode.address})
+        if(response){
+            res.status(200).json({address: childNode.address});
+        }
+    }catch (e){
+        console.log(e);
+        res.status(500).json({message: "duplicate address found"});
+    }
 
 
-    res.status(200).json({address: childNode.address});
+
 }
