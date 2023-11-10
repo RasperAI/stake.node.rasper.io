@@ -25,9 +25,9 @@ app.use(express.json());
 app.use('/', router);
 
 const main = async () => {
-
+    console.log("HD Wallet ->",process.env.XPUB_ADDRESS);
     const provider = new JsonRpcProvider(process.env.RPC_PROVIDER);
-    const contract = new ethers.Contract(process.env.USDT_MAINNET_CONTRACT_ADDRESS, abi, provider);
+    const contract = new ethers.Contract(process.env.CONTRACT_ADDRESS, abi, provider);
 
     console.log("Transfer event watching");
     await contract.on('Transfer', async function (from, to, value, event) {
