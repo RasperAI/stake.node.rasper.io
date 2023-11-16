@@ -30,6 +30,8 @@ const main = async () => {
     const contract = new ethers.Contract(process.env.CONTRACT_ADDRESS, abi, provider);
 
     console.log("Transfer event watching");
+    // console.log(process.env.MLM_URL);
+
     await contract.on('Transfer', async function (from, to, value, event) {
         // console.log(from, to, value, event.log.transactionHash);
 
